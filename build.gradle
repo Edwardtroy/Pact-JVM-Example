@@ -37,7 +37,7 @@ subprojects {
 }
 
 project(':example-consumer-miku') {
-    version '1.0.0'
+    version '1.0.1'
     apply plugin: 'au.com.dius.pact'
 
     jar {
@@ -53,18 +53,23 @@ project(':example-consumer-miku') {
         publish {
             pactDirectory = "$rootDir/Pacts/Miku"
 
-            pactBrokerUrl = mybrokerUrl
-            pactBrokerUsername = mybrokerUser
-            pactBrokerPassword = mybrokerPassword
+//            pactBrokerUrl = mybrokerUrl
+//            pactBrokerUsername = mybrokerUser
+//            pactBrokerPassword = mybrokerPassword
 
             // This is to local Pact Broker in Docker
-//            pactBrokerUrl = "http://localhost"
+            pactBrokerUrl = "http://localhost"
+            pactBrokerUsername = ''
+            pactBrokerPassword = ''
         }
     }
 }
 
 
 project(':example-consumer-nanoha') {
+    version '1.0.0'
+    apply plugin: 'au.com.dius.pact'
+
     jar {
         baseName = 'example-consumer-nanoha'
         version =  '1.0.0'
@@ -72,6 +77,15 @@ project(':example-consumer-nanoha') {
 
     test {
         systemProperties['pact.rootDir'] = "$rootDir/Pacts/Nanoha"
+    }
+
+    pact{
+        publish{
+            pactDirectory = "$rootDir/Pacts/Nanoha"
+            pactBrokerUrl = "http://localhost"
+            pactBrokerUsername = ''
+            pactBrokerPassword = ''
+        }
     }
 }
 
